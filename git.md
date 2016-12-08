@@ -2,6 +2,7 @@
 ## 基本设置
 	git config --global user.name 'wufl'
 	git config --global user.email 'wufl_april@162.com'
+	git config --global http.sslVerify false 关闭ssl验证
 ## 提交代码
 	git init 创建git仓库
 	git clone /path
