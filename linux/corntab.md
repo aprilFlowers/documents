@@ -1,4 +1,4 @@
-## 进程管理（计时器）
+# 进程管理（计时器）
 corntabs 和 cornjobs  计时器设置,执行周期性的指定命令，每一个进程（cron）在指定时间醒来，去检查crontab文件是否有任务需要执行。
 ## 安装corntabs
 	yum install -y vixie-cron
