@@ -8,7 +8,7 @@
 	git clone /path
 	touch test.txt
 	vim test.txt
-	git add -A
+	git add .	
 	git status
 	git commit -m 'msg'
 	git remote add origin 
@@ -17,7 +17,13 @@
 	git giff source_branch target_branch
 ## 拉取代码
 	git clone link 
-	git pull origin branch 更新代码
+	git pull origin branch 更新代码	
+## 回退版本
+	git branch 显示所有分支	
+	git log 显示 所有commit
+	git reset --hard commit_tag 回退本地代码
+	git push origin :branch 删除当前分支
+	git push origin branch 推送本地代码到远程分支
 ## 修复故障
 	git fetch origin 获取远程文件
 	git reset --hard origin/master 回退本地修改到指定提交状态,两者一起可以丢弃本地修改与提交
