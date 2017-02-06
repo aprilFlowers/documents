@@ -31,4 +31,6 @@
 	:n1,n2s/old/new/g n1,n2范围中old全部替换
 	:%s/old/new/g 替换文件中当前的所有old
 	:r 导入
-
+## 使用小贴士
+	:1,$d 删除全部文本
+	shift+v 选中当前行文本
