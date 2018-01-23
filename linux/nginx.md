@@ -18,3 +18,4 @@
         make
         sudo cp -rfp objs/nginx /usr/sbin/nginx
         nginx -v
+        service nginx restart
