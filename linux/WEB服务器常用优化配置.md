@@ -65,25 +65,25 @@ SELINUX=disabled
 1. [fastcgi 配置优化]https://www.cnblogs.com/yezhaohui/p/4377662.html
 1. [更新nginx]（https://segmentfault.com/a/1190000006755963#articleHeader6）
 
-      #默认1，修改为8，
-      worker_processes  8;
-      #连接数默认1024，修改12500；添加use epoll； 
-      events {
-              worker_connections  12500;
-              use epoll;
-      }
-      #默认60，修改为15
-      keepalive_timeout 15;
-      #添加如下配置
-      tcp_nopush      on;
-      tcp_nodelay     on;
-      send_timeout 100;
-      fastcgi_connect_timeout 100;
-      fastcgi_send_timeout 100;
-      fastcgi_read_timeout 100;
-      fastcgi_buffer_size 64k;
-      fastcgi_buffers 4 64k;
-      fastcgi_busy_buffers_size 128k;
+        #默认1，修改为8，
+        worker_processes  8;
+        #连接数默认1024，修改12500；添加use epoll； 
+        events {
+          worker_connections  12500;
+          use epoll;
+        }
+        #默认60，修改为15
+        keepalive_timeout 15;
+        #添加如下配置
+        tcp_nopush      on;
+        tcp_nodelay     on;
+        send_timeout 100;
+        fastcgi_connect_timeout 100;
+        fastcgi_send_timeout 100;
+        fastcgi_read_timeout 100;
+        fastcgi_buffer_size 64k;
+        fastcgi_buffers 4 64k;
+        fastcgi_busy_buffers_size 128k;
 
 1. fastcgi_cache_path是为FastCGI缓存指定一个文件路径、目录结构等级、关键字区域存储时间和非活动删除时间。
 1. fastcgi_connect_timeout指定连接到后端FastCGI的超时时间。
