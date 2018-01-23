@@ -62,7 +62,8 @@ SELINUX=disabled
     #echo "NETWORKING_IPV6=off" >> /etc/sysconfig/network
 
 ## nginx.conf 配置优化
-[fastcgi 配置优化]https://www.cnblogs.com/yezhaohui/p/4377662.html
+1. [fastcgi 配置优化]https://www.cnblogs.com/yezhaohui/p/4377662.html
+1. [更新nginx]（https://segmentfault.com/a/1190000006755963#articleHeader6）
 
       #默认1，修改为8，
       worker_processes  8;
