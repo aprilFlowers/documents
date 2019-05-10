@@ -1,0 +1,28 @@
+Microsoft Excel 数据格式转化
+使用Microsoft Visual Basic
+
+1:EXCEL文件中添加0
+
+Sub 零()
+Sheet1.Range("C1:C100000") = 0
+End Sub
+
+2:Excel文件转换为csv文件
+
+Sub 拆分()
+Application.DisplayAlerts = False
+Dim sht As Worksheet
+Dim MyBook As Workbook
+Set MyBook = ActiveWorkbook
+For Each sht In MyBook.Sheets
+sht.Copy
+    With ActiveWorkbook.WebOptions
+    End With
+    With Application.DefaultWebOptions
+    End With
+ActiveWorkbook.SaveAs Filename:=MyBook.Path & "\" & sht.Name, FileFormat:=xlCSV, CreateBackup:=False
+
+ActiveWorkbook.Close
+Next
+End
+End Sub

@@ -1,0 +1,74 @@
+﻿//获取code
+https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/androidpublisher&response_type=code&access_type=offline&redirect_uri=…&client_id=. 
+
+code=''
+
+
+client_id=''
+client_secret=''
+redirect_uri=''
+
+
+//获取refresh_token  
+$url = "https://accounts.google.com/o/oauth2/token";
+$data = array(
+    'grant_type'=>'authorization_code',
+    'code'=>'4/eWdxD7b-YSQ5CNNb-c2iI83KQx19.wp6198ti5Zc7dJ3UXOl0T3aRLxQmbwI',
+    'client_id'=>'',
+    'client_secret'=>'',
+    'redirect_uri'=>'http://www.tapenjoy.com/',
+    );
+ $contents = $this->curl($url,$data);
+ echo $contents;
+ 
+//如果成功，会获得类似于这样的返回 
+{ 
+“access_token” : “”, 
+“token_type” : “Bearer”, 
+“expires_in” : 3600, 
+“refresh_token” : “” 
+} 
+ 
+3.订单验证
+
+// 1.获取access_token
+    $url = "https://accounts.google.com/o/oauth2/token";
+    $data_tmp = array(
+        'grant_type'=>'refresh_token',
+        'refresh_token'=>'上面获取到的refresh_token',
+        'client_id'=>'',
+        'client_secret'=>'',
+        );
+    $contents = $this->curl($url,$data_tmp,'post');
+    $contents = json_decode($contents,true);
+    $access_token = $contents['access_token'];
+// 2.通过获得access_token 就可以请求谷歌的 API接口，获得订单状态
+    $url = "https://www.googleapis.com/androidpublisher/v2/applications/{$packageName}/purchases/products/{$productId}/tokens/{$purchaseToken}?access_token={$access_token}";
+    $contents = $this->curl($url);
+    $contents = json_decode($contents,true);
+    if($contents['consumptionState'] == 0 && $contents['purchaseState'] == 0){
+        //验证成功 没有消耗 购买成功
+        //处理游戏逻辑
+    }
+	
+//curl方法
+private function curl($url,$data=null,$method = null){
+    $ch=curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    if ($method == 'post') {
+        curl_setopt($ch, CURLOPT_POST,1);
+    }
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch,CURLOPT_PROXYTYPE,CURLPROXY_SOCKS5);//使用了SOCKS5代理
+    curl_setopt($ch,CURLOPT_PROXY,'192.168.100.2');//代理服务器
+    curl_setopt($ch,CURLOPT_PROXYPORT,'1080');//代理端口
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //不验证证书 https访问的时候
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); //不验证证书 https访问的时候
+    if($data){
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);//传递参数
+    }
+    $output = curl_exec($ch);
+    curl_close($ch);
+    return $output;
+} 
